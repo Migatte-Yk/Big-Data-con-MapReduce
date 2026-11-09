@@ -1,0 +1,5 @@
+Registros válidos según pandas: 4878
+ventas_categoria     claves=  6  coincide=SÍ
+cantidad_categoria   claves=  6  coincide=SÍ
+ingresos_producto    claves= 24  coincide=SÍ
+RESULTADO: todas las salidas de Hadoop coinciden

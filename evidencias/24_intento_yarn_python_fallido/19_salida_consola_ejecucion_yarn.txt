@@ -1,0 +1,108 @@
+
+=================== 1. Versiones de las herramientas ===================
+$ java -version
+openjdk version "17.0.19" 2026-04-21 LTS
+OpenJDK Runtime Environment Microsoft-13877129 (build 17.0.19+10-LTS)
+OpenJDK 64-Bit Server VM Microsoft-13877129 (build 17.0.19+10-LTS, mixed mode, sharing)
+$ python --version
+Python 3.14.4
+$ hadoop version
+Hadoop 3.3.6
+Source code repository https://github.com/apache/hadoop.git -r 1be78238728da9266a4f88195058f08fd012bf9c
+Compiled by ubuntu on 2023-06-18T08:22Z
+Compiled on platform linux-x86_64
+Compiled with protoc 3.7.1
+From source with checksum 5652179ad55f76cb287d9c633bb53bbd
+This command was run using /C:/hadoop/share/hadoop/common/hadoop-common-3.3.6.jar
+$ git --version
+git version 2.53.0.windows.2
+HADOOP_HOME=C:\hadoop
+JAVA_HOME=C:\PROGRA~1\MIE74D~1\JDK-17~1.10-
+HADOOP_CONF_DIR=C:\hadoop\etc\hadoop
+
+=================== 2. Estado del clúster ===================
+$ hdfs dfsadmin -report
+Configured Capacity: 510906068992 (475.82 GB)
+DFS Remaining: 164601155584 (153.30 GB)
+DFS Used: 860014 (839.86 KB)
+Live datanodes (1):
+Name: 127.0.0.1:9866 (127.0.0.1)
+Configured Capacity: 510906068992 (475.82 GB)
+DFS Used: 860014 (839.86 KB)
+Non DFS Used: 346304053394 (322.52 GB)
+DFS Remaining: 164601155584 (153.30 GB)
+DFS Remaining%: 32.22%
+$ yarn node -list -all
+2026-11-08 23:00:40,699 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+Total Nodes:1
+         Node-Id	     Node-State	Node-Http-Address	Number-of-Running-Containers
+DESKTOP-69SJHMN:53586	        RUNNING	DESKTOP-69SJHMN:8042	                           0
+
+=================== 3. Carga del dataset en HDFS ===================
+$ hdfs dfs -mkdir -p /user/bigdata/ventas/entrada
+$ hdfs dfs -put -f data/dataset.csv /user/bigdata/ventas/entrada/
+$ hdfs dfs -ls -R /user/bigdata/ventas
+-rw-r--r--   1 Migatte supergroup     463189 2026-11-08 23:00 /user/bigdata/ventas/entrada/dataset.csv
+$ hdfs dfs -cat /user/bigdata/ventas/entrada/dataset.csv | head -4
+id_venta,fecha,region,categoria,producto_id,producto,cantidad,precio_unitario,total_venta,metodo_pago
+V00001,2025-02-22,Fusagasugá,Electrónica,ELE-005,"Cargador USB-C, 65W",8,123400.00,987200.00,PSE
+V00002,2025-05-03,Bogotá,Ropa,ROP-004,Tenis urbanos,4,203400.00,813600.00,Tarjeta
+V00003,2025-09-09,Facatativá,Alimentos,ALI-004,Aceite de oliva 1 L,1,49500.00,49500.00,Transferencia
+$ hdfs fsck /user/bigdata/ventas/entrada/dataset.csv -files -blocks
+/user/bigdata/ventas/entrada/dataset.csv 463189 bytes, replicated: replication=1, 1 block(s):  OK
+0. BP-630691370-192.168.20.98-1794194074958:blk_1073741838_1014 len=463189 Live_repl=1
+Status: HEALTHY
+
+=================== 5. Job1_ventas_por_categoria (modo yarn) ===================
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+2026-11-08 23:01:48,499 INFO mapreduce.Job: Job job_1794196757153_0001 failed with state FAILED due to: Task failed task_1794196757153_0001_m_000000
+Job failed as tasks failed. failedMaps:1 failedReduces:0 killedMaps:0 killedReduces: 0
+Duración (s): 49
+--- Lectura del resultado desde HDFS
+$ hdfs dfs -ls /user/bigdata/ventas/salida/ventas_categoria
+$ hdfs dfs -cat /user/bigdata/ventas/salida/ventas_categoria/part-00000
+cat: `/user/bigdata/ventas/salida/ventas_categoria/part-00000': No such file or directory
+
+=================== 6. Job2_cantidad_por_categoria (modo yarn) ===================
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+2026-11-08 23:02:48,364 INFO mapreduce.Job: Job job_1794196757153_0002 failed with state FAILED due to: Task failed task_1794196757153_0002_m_000000
+Job failed as tasks failed. failedMaps:1 failedReduces:0 killedMaps:0 killedReduces: 0
+Duración (s): 48
+--- Lectura del resultado desde HDFS
+$ hdfs dfs -ls /user/bigdata/ventas/salida/cantidad_categoria
+$ hdfs dfs -cat /user/bigdata/ventas/salida/cantidad_categoria/part-00000
+cat: `/user/bigdata/ventas/salida/cantidad_categoria/part-00000': No such file or directory
+
+=================== 7. Job3_ingresos_por_producto (modo yarn) ===================
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+2026-11-08 23:03:46,137 INFO mapreduce.Job: Job job_1794196757153_0003 failed with state FAILED due to: Task failed task_1794196757153_0003_m_000000
+Job failed as tasks failed. failedMaps:1 failedReduces:0 killedMaps:0 killedReduces: 0
+Duración (s): 45
+--- Lectura del resultado desde HDFS
+$ hdfs dfs -ls /user/bigdata/ventas/salida/ingresos_producto
+$ hdfs dfs -cat /user/bigdata/ventas/salida/ingresos_producto/part-00000
+cat: `/user/bigdata/ventas/salida/ingresos_producto/part-00000': No such file or directory
+
+=================== 8. Árbol de salidas en HDFS ===================
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:00 /user/bigdata/ventas/entrada
+-rw-r--r--   1 Migatte supergroup     463189 2026-11-08 23:00 /user/bigdata/ventas/entrada/dataset.csv
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:03 /user/bigdata/ventas/salida
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:02 /user/bigdata/ventas/salida/cantidad_categoria
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:03 /user/bigdata/ventas/salida/ingresos_producto
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:01 /user/bigdata/ventas/salida/ventas_categoria
+Ejecución finalizada correctamente.

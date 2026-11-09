@@ -1,0 +1,8 @@
+
+@rem ---- Configuracion practica MapReduce (R2-A4-S15) ----
+@rem Ruta corta 8.3 del JDK 17 (Hadoop en Windows no admite espacios en JAVA_HOME)
+set JAVA_HOME=C:\PROGRA~1\MIE74D~1\JDK-17~1.10-
+@rem Java 17: abrir modulos usados por reflexion en Hadoop 3.3.x
+set ADD_OPENS=--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+set HADOOP_OPTS=%HADOOP_OPTS% %ADD_OPENS%
+set YARN_OPTS=%YARN_OPTS% %ADD_OPENS%

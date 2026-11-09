@@ -1,0 +1,35 @@
+packageJobJar: [/C:/Users/Migatte/AppData/Local/Temp/hadoop-unjar14938684485207235684/] [] C:\Users\Migatte\AppData\Local\Temp\streamjob4727797240883349171.jar tmpDir=null
+2026-11-08 22:17:06,624 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2026-11-08 22:17:06,826 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2026-11-08 22:17:07,075 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/Migatte/.staging/job_1794194105708_0001
+2026-11-08 22:17:07,533 INFO mapred.FileInputFormat: Total input files to process : 1
+2026-11-08 22:17:08,022 INFO mapreduce.JobSubmitter: number of splits:2
+2026-11-08 22:17:08,224 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1794194105708_0001
+2026-11-08 22:17:08,225 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-11-08 22:17:08,448 INFO conf.Configuration: resource-types.xml not found
+2026-11-08 22:17:08,449 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-11-08 22:17:08,702 INFO impl.YarnClientImpl: Submitted application application_1794194105708_0001
+2026-11-08 22:17:08,752 INFO mapreduce.Job: The url to track the job: http://DESKTOP-69SJHMN:8088/proxy/application_1794194105708_0001/
+2026-11-08 22:17:08,755 INFO mapreduce.Job: Running job: job_1794194105708_0001
+2026-11-08 22:17:15,821 INFO mapreduce.Job: Job job_1794194105708_0001 running in uber mode : false
+2026-11-08 22:17:15,823 INFO mapreduce.Job:  map 0% reduce 0%
+2026-11-08 22:17:15,848 INFO mapreduce.Job: Job job_1794194105708_0001 failed with state FAILED due to: Application application_1794194105708_0001 failed 2 times due to AM Container for appattempt_1794194105708_0001_000002 exited with  exitCode: 1
+Failing this attempt.Diagnostics: [2026-11-08 22:17:15.199]Exception from container-launch.
+Container id: container_1794194105708_0001_02_000001
+Exit code: 1
+Exception message: CreateSymbolicLink error (1314): El cliente no dispone de un privilegio requerido.
+
+
+
+Shell output: Se han movido         1 archivos.
+"Setting up env variables"
+"Setting up job resources"
+
+
+[2026-11-08 22:17:15.201]Container exited with a non-zero exit code 1. 
+[2026-11-08 22:17:15.201]Container exited with a non-zero exit code 1. 
+For more detailed output, check the application tracking page: http://DESKTOP-69SJHMN:8088/cluster/app/application_1794194105708_0001 Then click on links to logs of each attempt.
+. Failing the application.
+2026-11-08 22:17:15,872 INFO mapreduce.Job: Counters: 0
+2026-11-08 22:17:15,874 ERROR streaming.StreamJob: Job not successful!
+Streaming Command Failed!

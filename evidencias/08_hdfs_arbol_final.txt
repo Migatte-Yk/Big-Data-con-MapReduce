@@ -1,0 +1,12 @@
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:05 /user/bigdata/ventas/entrada
+-rw-r--r--   1 Migatte supergroup     463189 2026-11-08 23:05 /user/bigdata/ventas/entrada/dataset.csv
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:07 /user/bigdata/ventas/salida
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:06 /user/bigdata/ventas/salida/cantidad_categoria
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 23:06 /user/bigdata/ventas/salida/cantidad_categoria/_SUCCESS
+-rw-r--r--   1 Migatte supergroup         80 2026-11-08 23:06 /user/bigdata/ventas/salida/cantidad_categoria/part-00000
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:07 /user/bigdata/ventas/salida/ingresos_producto
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 23:07 /user/bigdata/ventas/salida/ingresos_producto/_SUCCESS
+-rw-r--r--   1 Migatte supergroup        934 2026-11-08 23:07 /user/bigdata/ventas/salida/ingresos_producto/part-00000
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 23:05 /user/bigdata/ventas/salida/ventas_categoria
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 23:05 /user/bigdata/ventas/salida/ventas_categoria/_SUCCESS
+-rw-r--r--   1 Migatte supergroup        127 2026-11-08 23:05 /user/bigdata/ventas/salida/ventas_categoria/part-00000

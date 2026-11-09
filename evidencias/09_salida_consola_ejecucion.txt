@@ -1,0 +1,204 @@
+
+=================== 1. Versiones de las herramientas ===================
+$ java -version
+openjdk version "17.0.19" 2026-04-21 LTS
+OpenJDK Runtime Environment Microsoft-13877129 (build 17.0.19+10-LTS)
+OpenJDK 64-Bit Server VM Microsoft-13877129 (build 17.0.19+10-LTS, mixed mode, sharing)
+$ python --version
+Python 3.14.4
+$ hadoop version
+Hadoop 3.3.6
+Source code repository https://github.com/apache/hadoop.git -r 1be78238728da9266a4f88195058f08fd012bf9c
+Compiled by ubuntu on 2023-06-18T08:22Z
+Compiled on platform linux-x86_64
+Compiled with protoc 3.7.1
+From source with checksum 5652179ad55f76cb287d9c633bb53bbd
+This command was run using /C:/hadoop/share/hadoop/common/hadoop-common-3.3.6.jar
+$ git --version
+git version 2.53.0.windows.2
+HADOOP_HOME=C:\hadoop
+JAVA_HOME=C:\PROGRA~1\MIE74D~1\JDK-17~1.10-
+HADOOP_CONF_DIR=C:\hadoop\etc\hadoop
+
+=================== 2. Estado del clúster ===================
+$ hdfs dfsadmin -report
+Configured Capacity: 510906068992 (475.82 GB)
+DFS Remaining: 166149271552 (154.74 GB)
+DFS Used: 858801 (838.67 KB)
+Live datanodes (1):
+Name: 127.0.0.1:9866 (127.0.0.1)
+Configured Capacity: 510906068992 (475.82 GB)
+DFS Used: 858801 (838.67 KB)
+Non DFS Used: 344755938639 (321.08 GB)
+DFS Remaining: 166149271552 (154.74 GB)
+DFS Remaining%: 32.52%
+$ yarn node -list -all
+2026-11-08 22:18:24,712 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+Total Nodes:1
+         Node-Id	     Node-State	Node-Http-Address	Number-of-Running-Containers
+DESKTOP-69SJHMN:59114	        RUNNING	DESKTOP-69SJHMN:8042	                           0
+
+=================== 3. Carga del dataset en HDFS ===================
+$ hdfs dfs -mkdir -p /user/bigdata/ventas/entrada
+$ hdfs dfs -put -f data/dataset.csv /user/bigdata/ventas/entrada/
+$ hdfs dfs -ls -R /user/bigdata/ventas
+-rw-r--r--   1 Migatte supergroup     463189 2026-11-08 22:18 /user/bigdata/ventas/entrada/dataset.csv
+$ hdfs dfs -cat /user/bigdata/ventas/entrada/dataset.csv | head -4
+id_venta,fecha,region,categoria,producto_id,producto,cantidad,precio_unitario,total_venta,metodo_pago
+V00001,2025-02-22,Fusagasugá,Electrónica,ELE-005,"Cargador USB-C, 65W",8,123400.00,987200.00,PSE
+V00002,2025-05-03,Bogotá,Ropa,ROP-004,Tenis urbanos,4,203400.00,813600.00,Tarjeta
+V00003,2025-09-09,Facatativá,Alimentos,ALI-004,Aceite de oliva 1 L,1,49500.00,49500.00,Transferencia
+$ hdfs fsck /user/bigdata/ventas/entrada/dataset.csv -files -blocks
+/user/bigdata/ventas/entrada/dataset.csv 463189 bytes, replicated: replication=1, 1 block(s):  OK
+0. BP-630691370-192.168.20.98-1794194074958:blk_1073741834_1010 len=463189 Live_repl=1
+Status: HEALTHY
+
+=================== 5. Job1_ventas_por_categoria (modo local) ===================
+		Encabezado omitido=1
+		Precio con coma normalizado=15
+		Precio invalido=19
+		Producto vacio=19
+		Registros validos=4878
+		Total recalculado=32
+		Combine output records=0
+		Reduce output records=6
+2026-11-08 22:18:49,193 INFO mapreduce.Job: Job job_local347978619_0001 completed successfully
+		Map input records=5001
+		Map output records=4878
+		Combine output records=6
+		Reduce output records=6
+	Calidad de datos
+		Cantidad no numerica=17
+		Cantidad no positiva=32
+		Categoria vacia=18
+		Columnas incompletas=17
+		Encabezado omitido=1
+		Precio con coma normalizado=15
+		Precio invalido=19
+		Producto vacio=19
+		Registros validos=4878
+		Total recalculado=32
+Duración (s): 6
+--- Lectura del resultado desde HDFS
+$ hdfs dfs -ls /user/bigdata/ventas/salida/ventas_categoria
+Found 2 items
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 22:18 /user/bigdata/ventas/salida/ventas_categoria/_SUCCESS
+-rw-r--r--   1 Migatte supergroup        127 2026-11-08 22:18 /user/bigdata/ventas/salida/ventas_categoria/part-00000
+$ hdfs dfs -cat /user/bigdata/ventas/salida/ventas_categoria/part-00000
+Alimentos	82327900.00
+Deportes	433513000.00
+Electrónica	597643900.00
+Hogar	343288900.00
+Libros	113946400.00
+Ropa	468758600.00
+
+=================== 6. Job2_cantidad_por_categoria (modo local) ===================
+		Encabezado omitido=1
+		Precio con coma normalizado=15
+		Precio invalido=19
+		Producto vacio=19
+		Registros validos=4878
+		Total recalculado=32
+		Combine output records=0
+		Reduce output records=6
+2026-11-08 22:19:08,372 INFO mapreduce.Job: Job job_local1797907852_0001 completed successfully
+		Map input records=5001
+		Map output records=4878
+		Combine output records=6
+		Reduce output records=6
+	Calidad de datos
+		Cantidad no numerica=17
+		Cantidad no positiva=32
+		Categoria vacia=18
+		Columnas incompletas=17
+		Encabezado omitido=1
+		Precio con coma normalizado=15
+		Precio invalido=19
+		Producto vacio=19
+		Registros validos=4878
+		Total recalculado=32
+Duración (s): 6
+--- Lectura del resultado desde HDFS
+$ hdfs dfs -ls /user/bigdata/ventas/salida/cantidad_categoria
+Found 2 items
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 22:19 /user/bigdata/ventas/salida/cantidad_categoria/_SUCCESS
+-rw-r--r--   1 Migatte supergroup         80 2026-11-08 22:19 /user/bigdata/ventas/salida/cantidad_categoria/part-00000
+$ hdfs dfs -cat /user/bigdata/ventas/salida/cantidad_categoria/part-00000
+Alimentos	3346
+Deportes	1345
+Electrónica	2316
+Hogar	1981
+Libros	1275
+Ropa	3034
+
+=================== 7. Job3_ingresos_por_producto (modo local) ===================
+		Encabezado omitido=1
+		Precio con coma normalizado=15
+		Precio invalido=19
+		Producto vacio=19
+		Registros validos=4878
+		Total recalculado=32
+		Combine output records=0
+		Reduce output records=24
+2026-11-08 22:19:26,843 INFO mapreduce.Job: Job job_local1206865355_0001 completed successfully
+		Map input records=5001
+		Map output records=4878
+		Combine output records=24
+		Reduce output records=24
+	Calidad de datos
+		Cantidad no numerica=17
+		Cantidad no positiva=32
+		Categoria vacia=18
+		Columnas incompletas=17
+		Encabezado omitido=1
+		Precio con coma normalizado=15
+		Precio invalido=19
+		Producto vacio=19
+		Registros validos=4878
+		Total recalculado=32
+Duración (s): 6
+--- Lectura del resultado desde HDFS
+$ hdfs dfs -ls /user/bigdata/ventas/salida/ingresos_producto
+Found 2 items
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 22:19 /user/bigdata/ventas/salida/ingresos_producto/_SUCCESS
+-rw-r--r--   1 Migatte supergroup        934 2026-11-08 22:19 /user/bigdata/ventas/salida/ingresos_producto/part-00000
+$ hdfs dfs -cat /user/bigdata/ventas/salida/ingresos_producto/part-00000
+ALI-001|Café de origen 500 g	29271100.00
+ALI-002|Chocolate de mesa	11135600.00
+ALI-003|Panela orgánica	5548800.00
+ALI-004|Aceite de oliva 1 L	36372400.00
+DEP-001|Balón de fútbol	27768900.00
+DEP-002|Mancuernas, par 5 kg	33899400.00
+DEP-003|Bicicleta estática	350617000.00
+DEP-004|Esterilla de yoga	21227700.00
+ELE-001|Audífonos inalámbricos	85943300.00
+ELE-002|Teclado mecánico	110997600.00
+ELE-003|Mouse óptico	26612200.00
+ELE-004|Monitor 24 pulgadas	312151800.00
+ELE-005|Cargador USB-C, 65W	61939000.00
+HOG-001|Juego de sábanas	73020900.00
+HOG-002|Lámpara de escritorio	40858100.00
+HOG-003|Set de ollas	152249400.00
+HOG-004|Cafetera de goteo	77160500.00
+LIB-001|Novela latinoamericana	27250800.00
+LIB-002|Manual de Python	51651000.00
+LIB-003|Atlas de Colombia	35044600.00
+ROP-001|Camiseta algodón	39743100.00
+ROP-002|Jean clásico	100626000.00
+ROP-003|Chaqueta impermeable	181729300.00
+ROP-004|Tenis urbanos	146660200.00
+
+=================== 8. Árbol de salidas en HDFS ===================
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 22:18 /user/bigdata/ventas/entrada
+-rw-r--r--   1 Migatte supergroup     463189 2026-11-08 22:18 /user/bigdata/ventas/entrada/dataset.csv
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 22:19 /user/bigdata/ventas/salida
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 22:19 /user/bigdata/ventas/salida/cantidad_categoria
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 22:19 /user/bigdata/ventas/salida/cantidad_categoria/_SUCCESS
+-rw-r--r--   1 Migatte supergroup         80 2026-11-08 22:19 /user/bigdata/ventas/salida/cantidad_categoria/part-00000
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 22:19 /user/bigdata/ventas/salida/ingresos_producto
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 22:19 /user/bigdata/ventas/salida/ingresos_producto/_SUCCESS
+-rw-r--r--   1 Migatte supergroup        934 2026-11-08 22:19 /user/bigdata/ventas/salida/ingresos_producto/part-00000
+drwxr-xr-x   - Migatte supergroup          0 2026-11-08 22:18 /user/bigdata/ventas/salida/ventas_categoria
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 22:18 /user/bigdata/ventas/salida/ventas_categoria/_SUCCESS
+-rw-r--r--   1 Migatte supergroup        127 2026-11-08 22:18 /user/bigdata/ventas/salida/ventas_categoria/part-00000
+Ejecución finalizada correctamente.

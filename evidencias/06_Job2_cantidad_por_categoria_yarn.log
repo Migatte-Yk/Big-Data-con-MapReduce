@@ -1,0 +1,95 @@
+$ hadoop jar hadoop-streaming-3.3.6.jar -D mapreduce.framework.name=yarn -D mapreduce.job.name=Job2_cantidad_por_categoria
+    -mapper mapper_cantidad_categoria.py -combiner reducer_cantidad_categoria.py -reducer reducer_cantidad_categoria.py
+    -input /user/bigdata/ventas/entrada/dataset.csv -output /user/bigdata/ventas/salida/cantidad_categoria
+packageJobJar: [/C:/Users/Migatte/AppData/Local/Temp/hadoop-unjar603990959632900552/] [] C:\Users\Migatte\AppData\Local\Temp\streamjob17251338713722614015.jar tmpDir=null
+2026-11-08 23:06:13,366 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2026-11-08 23:06:13,561 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2026-11-08 23:06:13,825 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/Migatte/.staging/job_1794196757153_0005
+2026-11-08 23:06:14,291 INFO mapred.FileInputFormat: Total input files to process : 1
+2026-11-08 23:06:14,364 INFO mapreduce.JobSubmitter: number of splits:2
+2026-11-08 23:06:14,555 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1794196757153_0005
+2026-11-08 23:06:14,555 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-11-08 23:06:14,766 INFO conf.Configuration: resource-types.xml not found
+2026-11-08 23:06:14,767 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-11-08 23:06:14,815 INFO impl.YarnClientImpl: Submitted application application_1794196757153_0005
+2026-11-08 23:06:14,850 INFO mapreduce.Job: The url to track the job: http://DESKTOP-69SJHMN:8088/proxy/application_1794196757153_0005/
+2026-11-08 23:06:14,852 INFO mapreduce.Job: Running job: job_1794196757153_0005
+2026-11-08 23:06:25,995 INFO mapreduce.Job: Job job_1794196757153_0005 running in uber mode : false
+2026-11-08 23:06:25,996 INFO mapreduce.Job:  map 0% reduce 0%
+2026-11-08 23:06:34,120 INFO mapreduce.Job:  map 100% reduce 0%
+2026-11-08 23:06:42,194 INFO mapreduce.Job:  map 100% reduce 100%
+2026-11-08 23:06:42,201 INFO mapreduce.Job: Job job_1794196757153_0005 completed successfully
+2026-11-08 23:06:42,321 INFO mapreduce.Job: Counters: 64
+	File System Counters
+		FILE: Number of bytes read=185
+		FILE: Number of bytes written=851406
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=467511
+		HDFS: Number of bytes written=80
+		HDFS: Number of read operations=11
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=2
+		Launched reduce tasks=1
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=22876
+		Total time spent by all reduces in occupied slots (ms)=12312
+		Total time spent by all map tasks (ms)=11438
+		Total time spent by all reduce tasks (ms)=6156
+		Total vcore-milliseconds taken by all map tasks=11438
+		Total vcore-milliseconds taken by all reduce tasks=6156
+		Total megabyte-milliseconds taken by all map tasks=11712512
+		Total megabyte-milliseconds taken by all reduce tasks=6303744
+	Map-Reduce Framework
+		Map input records=5001
+		Map output records=4878
+		Map output bytes=50965
+		Map output materialized bytes=191
+		Input split bytes=226
+		Combine input records=4878
+		Combine output records=12
+		Reduce input groups=6
+		Reduce shuffle bytes=191
+		Reduce input records=12
+		Reduce output records=6
+		Spilled Records=24
+		Shuffled Maps =2
+		Failed Shuffles=0
+		Merged Map outputs=2
+		GC time elapsed (ms)=46
+		CPU time spent (ms)=3292
+		Physical memory (bytes) snapshot=769380352
+		Virtual memory (bytes) snapshot=919486464
+		Total committed heap usage (bytes)=380633088
+		Peak Map Physical memory (bytes)=288874496
+		Peak Map Virtual memory (bytes)=338542592
+		Peak Reduce Physical memory (bytes)=198905856
+		Peak Reduce Virtual memory (bytes)=249085952
+	Calidad de datos
+		Cantidad no numerica=17
+		Cantidad no positiva=32
+		Categoria vacia=18
+		Columnas incompletas=17
+		Encabezado omitido=1
+		Precio con coma normalizado=15
+		Precio invalido=19
+		Producto vacio=19
+		Registros validos=4878
+		Total recalculado=32
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=467285
+	File Output Format Counters 
+		Bytes Written=80
+2026-11-08 23:06:42,321 INFO streaming.StreamJob: Output directory: /user/bigdata/ventas/salida/cantidad_categoria
+Duración (s): 32

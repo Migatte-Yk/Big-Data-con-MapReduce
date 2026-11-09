@@ -1,0 +1,11 @@
+$ hdfs dfs -ls /user/bigdata/ventas/salida/ventas_categoria
+Found 2 items
+-rw-r--r--   1 Migatte supergroup          0 2026-11-08 23:05 /user/bigdata/ventas/salida/ventas_categoria/_SUCCESS
+-rw-r--r--   1 Migatte supergroup        127 2026-11-08 23:05 /user/bigdata/ventas/salida/ventas_categoria/part-00000
+$ hdfs dfs -cat /user/bigdata/ventas/salida/ventas_categoria/part-00000
+Alimentos	82327900.00
+Deportes	433513000.00
+Electrónica	597643900.00
+Hogar	343288900.00
+Libros	113946400.00
+Ropa	468758600.00

@@ -1,0 +1,2 @@
+Dataset sintético escrito en C:\Users\Migatte\Desktop\Posgrado\BigDataMapReduce\data\dataset.csv (5000 registros + encabezado)
+Defectos insertados: {'cant_cero': 12, 'cant_neg': 20, 'cant_texto': 17, 'cat_vacia': 18, 'precio_coma': 15, 'precio_texto': 19, 'prod_vacio': 19, 'total_vacio': 17, 'truncada': 17}

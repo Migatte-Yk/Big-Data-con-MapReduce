@@ -1,0 +1,13 @@
+$ hdfs dfs -mkdir -p /user/bigdata/ventas/entrada
+$ hdfs dfs -put -f data/dataset.csv /user/bigdata/ventas/entrada/
+$ hdfs dfs -ls -R /user/bigdata/ventas
+-rw-r--r--   1 Migatte supergroup     463189 2026-11-08 23:05 /user/bigdata/ventas/entrada/dataset.csv
+$ hdfs dfs -cat /user/bigdata/ventas/entrada/dataset.csv | head -4
+id_venta,fecha,region,categoria,producto_id,producto,cantidad,precio_unitario,total_venta,metodo_pago
+V00001,2025-02-22,Fusagasugá,Electrónica,ELE-005,"Cargador USB-C, 65W",8,123400.00,987200.00,PSE
+V00002,2025-05-03,Bogotá,Ropa,ROP-004,Tenis urbanos,4,203400.00,813600.00,Tarjeta
+V00003,2025-09-09,Facatativá,Alimentos,ALI-004,Aceite de oliva 1 L,1,49500.00,49500.00,Transferencia
+$ hdfs fsck /user/bigdata/ventas/entrada/dataset.csv -files -blocks
+/user/bigdata/ventas/entrada/dataset.csv 463189 bytes, replicated: replication=1, 1 block(s):  OK
+0. BP-630691370-192.168.20.98-1794194074958:blk_1073741875_1051 len=463189 Live_repl=1
+Status: HEALTHY

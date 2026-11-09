@@ -1,0 +1,16 @@
+$ hdfs dfsadmin -report
+Configured Capacity: 510906068992 (475.82 GB)
+DFS Remaining: 164599287808 (153.30 GB)
+DFS Used: 1775243 (1.69 MB)
+Live datanodes (1):
+Name: 127.0.0.1:9866 (127.0.0.1)
+Configured Capacity: 510906068992 (475.82 GB)
+DFS Used: 1775243 (1.69 MB)
+Non DFS Used: 346305005941 (322.52 GB)
+DFS Remaining: 164599287808 (153.30 GB)
+DFS Remaining%: 32.22%
+$ yarn node -list -all
+2026-11-08 23:05:06,055 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+Total Nodes:1
+         Node-Id	     Node-State	Node-Http-Address	Number-of-Running-Containers
+DESKTOP-69SJHMN:53586	        RUNNING	DESKTOP-69SJHMN:8042	                           0

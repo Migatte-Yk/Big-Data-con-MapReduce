@@ -1,0 +1,11 @@
+[WARNING] Failed to read unmanaged installs: expected str, bytes or os.PathLike object, not NoneType
+Python install manager was successfully updated to 26.4.
+
+Please see https://github.com/python/pymanager/releases/tag/26.4 for all changes.
+
+********************************************************************************
+[WARNING] Failed to read unmanaged installs: expected str, bytes or os.PathLike object, not NoneType
+To see all available commands, run 'py help'
+********************************************************************************
+[ERROR] INTERNAL ERROR: NoInstallsError: No runtimes are installed. Try running "py install default" first.
+[ERROR] Internal error 0x00000001. Please report to https://github.com/python/pymanager

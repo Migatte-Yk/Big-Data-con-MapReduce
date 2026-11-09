@@ -1,0 +1,60 @@
+$ hadoop jar hadoop-streaming-3.3.6.jar -D mapreduce.framework.name=yarn -D mapreduce.job.name=Job1_ventas_por_categoria
+    -mapper mapper_ventas_categoria.py -combiner reducer_ventas_categoria.py -reducer reducer_ventas_categoria.py
+    -input /user/bigdata/ventas/entrada/dataset.csv -output /user/bigdata/ventas/salida/ventas_categoria
+packageJobJar: [/C:/Users/Migatte/AppData/Local/Temp/hadoop-unjar4256476546512375329/] [] C:\Users\Migatte\AppData\Local\Temp\streamjob15705937055016197635.jar tmpDir=null
+2026-11-08 23:01:03,139 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2026-11-08 23:01:03,355 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2026-11-08 23:01:03,607 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/Migatte/.staging/job_1794196757153_0001
+2026-11-08 23:01:04,096 INFO mapred.FileInputFormat: Total input files to process : 1
+2026-11-08 23:01:04,179 INFO mapreduce.JobSubmitter: number of splits:2
+2026-11-08 23:01:04,407 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1794196757153_0001
+2026-11-08 23:01:04,408 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-11-08 23:01:04,665 INFO conf.Configuration: resource-types.xml not found
+2026-11-08 23:01:04,666 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-11-08 23:01:04,949 INFO impl.YarnClientImpl: Submitted application application_1794196757153_0001
+2026-11-08 23:01:05,006 INFO mapreduce.Job: The url to track the job: http://DESKTOP-69SJHMN:8088/proxy/application_1794196757153_0001/
+2026-11-08 23:01:05,008 INFO mapreduce.Job: Running job: job_1794196757153_0001
+2026-11-08 23:01:17,205 INFO mapreduce.Job: Job job_1794196757153_0001 running in uber mode : false
+2026-11-08 23:01:17,206 INFO mapreduce.Job:  map 0% reduce 0%
+2026-11-08 23:01:24,293 INFO mapreduce.Job: Task Id : attempt_1794196757153_0001_m_000000_0, Status : FAILED
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+
+2026-11-08 23:01:24,315 INFO mapreduce.Job: Task Id : attempt_1794196757153_0001_m_000001_0, Status : FAILED
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+
+2026-11-08 23:01:31,375 INFO mapreduce.Job: Task Id : attempt_1794196757153_0001_m_000000_1, Status : FAILED
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+
+2026-11-08 23:01:32,382 INFO mapreduce.Job: Task Id : attempt_1794196757153_0001_m_000001_1, Status : FAILED
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+
+2026-11-08 23:01:40,440 INFO mapreduce.Job: Task Id : attempt_1794196757153_0001_m_000000_2, Status : FAILED
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+
+2026-11-08 23:01:41,448 INFO mapreduce.Job: Task Id : attempt_1794196757153_0001_m_000001_2, Status : FAILED
+Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 1
+
+2026-11-08 23:01:48,492 INFO mapreduce.Job:  map 100% reduce 100%
+2026-11-08 23:01:48,499 INFO mapreduce.Job: Job job_1794196757153_0001 failed with state FAILED due to: Task failed task_1794196757153_0001_m_000000
+Job failed as tasks failed. failedMaps:1 failedReduces:0 killedMaps:0 killedReduces: 0
+
+2026-11-08 23:01:48,586 INFO mapreduce.Job: Counters: 14
+	Job Counters 
+		Failed map tasks=7
+		Killed map tasks=1
+		Killed reduce tasks=1
+		Launched map tasks=8
+		Other local map tasks=6
+		Data-local map tasks=2
+		Total time spent by all maps in occupied slots (ms)=90376
+		Total time spent by all reduces in occupied slots (ms)=0
+		Total time spent by all map tasks (ms)=45188
+		Total vcore-milliseconds taken by all map tasks=45188
+		Total megabyte-milliseconds taken by all map tasks=46272512
+	Map-Reduce Framework
+		CPU time spent (ms)=0
+		Physical memory (bytes) snapshot=0
+		Virtual memory (bytes) snapshot=0
+2026-11-08 23:01:48,586 ERROR streaming.StreamJob: Job not successful!
+Streaming Command Failed!
+Duración (s): 49
